@@ -40,7 +40,7 @@ python server.py
 python -m unittest discover -s tests -t .
 ```
 
-Son 54 pruebas. Entre ellas, cubren estos puntos:
+Son 59 pruebas. Entre ellas, cubren estos puntos:
 - **Condición de carrera:** dos administradores aprueban a la vez solicitudes que se cruzan, 12 rondas contra el servidor real.
 - **Privacidad:** se cargan datos personales reconocibles y se verifica que no aparezcan en ninguna página ni respuesta pública.
 - **Token de seguimiento:** no se puede adivinar ni enumerar, y la base guarda solo su hash.
@@ -73,9 +73,25 @@ Notas sobre el recorrido:
 | `scripts/backup.py [carpeta]` | Respaldo consistente de SQLite. **No está cifrado**: guárdelo en un disco cifrado (ver SPEC 7.4). |
 | `scripts/anonymize.py` | Anonimiza solicitudes viejas. El servidor también lo hace al arrancar y una vez al día. |
 
+## Demo pública en Render
+
+El archivo [render.yaml](render.yaml) despliega una demo con **solo datos ficticios** en el plan gratuito de Render. Un *Blueprint* es la receta que Render lee de `render.yaml` para crear el servicio. En modo demo:
+
+- Al arrancar, y cada 24 horas, **se borra todo y se recargan los datos ficticios**. Así, lo que escriban las personas que la prueban no se acumula.
+- Todas las páginas dicen **"No escriba datos personales reales"**.
+- La contraseña del usuario `admin` la **genera Render**; no está en el repositorio. Se ve en el panel de Render, en *Environment*, en la variable `CCDR_DEMO_ADMIN_PASSWORD`.
+- El plan gratis se apaga después de 15 minutos sin visitas. La primera carga tarda cerca de un minuto, y Render puede reiniciar el servicio en cualquier momento (lo que también recarga los datos).
+
+**Cómo publicarla:**
+1. Entre a <https://dashboard.render.com> con la cuenta de GitHub.
+2. Elija **New → Blueprint** y luego el repositorio `ccdr-heredia`.
+3. Pulse **Apply**.
+
+Render crea el servicio `ccdr-heredia-demo` y lo vuelve a desplegar en cada `git push` a `main`.
+
 ## Configuración
 
-Los valores por defecto están en [app/config.py](app/config.py). Para cambiarlos, cree un `config.local.json`, que git ignora:
+Los valores por defecto están en [app/config.py](app/config.py). Se pueden cambiar de dos formas: con un `config.local.json`, que git ignora, o con variables de entorno `CCDR_<CLAVE>`, por ejemplo `CCDR_MIN_NOTICE_HOURS=48`. `HOST` y `PORT` también se leen del entorno.
 
 ```json
 { "min_notice_hours": 48, "max_minutes": 180, "secure_cookies": true }
@@ -111,6 +127,8 @@ Los **límites de reserva son supuestos que el CCDR debe confirmar**:
 - Los límites por IP viven en memoria: se reinician al reiniciar el servidor y no sirven si se corren varios procesos.
 - No se confía en `X-Forwarded-For`. Si se publica detrás de un proxy, todo el tráfico se verá como una sola IP y habría que configurarlo aparte.
 - Alguien que conozca el nombre de usuario puede bloquear esa cuenta por 15 minutos fallando 5 veces.
+- Con `trust_proxy` activado (como en Render), la IP se toma de `X-Forwarded-For`, que un cliente puede falsificar para saltarse el límite por IP. En la demo se acepta ese riesgo; en producción hay que confiar solo en el proxy propio.
+- En la demo pública, cualquiera que conozca la contraseña compartida de `admin` puede aprobar o borrar datos ficticios, y alguien podría bloquear la cuenta 15 minutos fallando 5 veces. Los datos se recargan solos cada día.
 - El servidor escucha solo en `127.0.0.1`. Para publicarlo en internet hace falta HTTPS delante (proxy inverso) y `secure_cookies: true`.
 - No envía correos ni mensajes; la administración contacta a las personas a mano (SPEC 3.3).
 
@@ -126,7 +144,9 @@ app/security.py      rate limiter, headers, validation
 app/timeutil.py      fixed UTC-6 time helpers
 static/public/       calendar, request form, status page
 static/admin/        admin SPA
+app/demo.py          fictitious demo dataset (seed script + demo mode)
 scripts/             seed_demo, create_admin, backup, anonymize
+render.yaml          Render Blueprint for the public demo
 tests/               unittest suite
 docs/                approved phase 1 proposal
 ```

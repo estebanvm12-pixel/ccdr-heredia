@@ -1,5 +1,6 @@
 """CCDR Heredia booking prototype: HTTP server and router (stdlib only)."""
 import json
+import os
 import re
 import sys
 import threading
@@ -9,7 +10,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlsplit
 
-from app import auth, bookings
+from app import auth, bookings, demo
 from app.config import BASE_DIR, load_config
 from app.db import connect, init_db
 from app.security import MAX_BODY_BYTES, SECURITY_HEADERS, ApiError, RateLimiter
@@ -73,6 +74,18 @@ class App:
         self.request_limiter = RateLimiter(config["request_rate_per_hour"], 3600)
         self.status_limiter = RateLimiter(config["status_rate_per_hour"], 3600)
         self.login_limiter = RateLimiter(config["login_rate_per_hour"], 3600)
+
+    def load_demo(self):
+        """Demo mode: wipe everything and reload fictitious data (admin password from env)."""
+        password = os.environ.get("CCDR_DEMO_ADMIN_PASSWORD", "")
+        if len(password) < 12:
+            raise SystemExit("Demo mode needs CCDR_DEMO_ADMIN_PASSWORD (12+ characters).")
+        conn = connect(self.db_path)
+        try:
+            demo.load_demo_data(conn, self.now(), password, self.config["consent_version"], wipe=True)
+        finally:
+            conn.close()
+        print("[demo] fictitious data reloaded", file=sys.stderr, flush=True)
 
     def run_maintenance(self):
         conn = connect(self.db_path)
@@ -141,6 +154,8 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header("Cache-Control", cache)
         for name, value in SECURITY_HEADERS.items():
             self.send_header(name, value)
+        if self.app.config["secure_cookies"]:
+            self.send_header("Strict-Transport-Security", "max-age=31536000")
         for name, value in extra_headers:
             self.send_header(name, value)
         self.end_headers()
@@ -206,6 +221,15 @@ class Handler(BaseHTTPRequestHandler):
         morsel = cookie.get(auth.SESSION_COOKIE)
         return morsel.value if morsel else None
 
+    def _client_ip(self):
+        """Socket address, or the first X-Forwarded-For entry when behind a trusted proxy."""
+        if self.app.config["trust_proxy"]:
+            forwarded = self.headers.get("X-Forwarded-For", "")
+            first = forwarded.split(",")[0].strip()
+            if first and len(first) <= 45:
+                return first
+        return self.client_address[0]
+
     def _check_origin(self):
         """Reject cross-site state-changing requests (defense in depth with CSRF)."""
         origin = self.headers.get("Origin")
@@ -248,7 +272,7 @@ class Handler(BaseHTTPRequestHandler):
             req = Request(
                 method=method, path=path, params=params,
                 query=parse_qs(urlsplit(self.path).query, max_num_fields=20),
-                body=body, ip=self.client_address[0], conn=conn, now=now,
+                body=body, ip=self._client_ip(), conn=conn, now=now,
                 session=session, session_token=token,
             )
             result = handler(app, req)
@@ -290,7 +314,10 @@ def make_server(app, host=HOST, port=PORT):
 
 
 def _maintenance_loop(app, stop_event):
-    while not stop_event.wait(24 * 3600):
+    hours = app.config["demo_reset_hours"] if app.config["demo_mode"] else 24
+    while not stop_event.wait(hours * 3600):
+        if app.config["demo_mode"]:
+            app.load_demo()
         app.run_maintenance()
 
 
@@ -300,11 +327,16 @@ def main():
         print("athletes_enabled=true but the athletes module is not implemented yet (phase 2).",
               file=sys.stderr)
     app = App(config)
+    if config["demo_mode"]:
+        app.load_demo()
     app.run_maintenance()
     stop = threading.Event()
     threading.Thread(target=_maintenance_loop, args=(app, stop), daemon=True).start()
-    server = make_server(app)
-    print(f"CCDR Heredia prototype on http://{HOST}:{PORT}/ (admin: /admin/)", flush=True)
+    host = os.environ.get("HOST", HOST)
+    port = int(os.environ.get("PORT", PORT))
+    server = make_server(app, host, port)
+    print(f"CCDR Heredia prototype on http://{host}:{port}/ (admin: /admin/)"
+          f"{' [demo mode]' if config['demo_mode'] else ''}", flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:
