@@ -31,7 +31,7 @@ class PrivacyTests(ServerTestCase):
 
         c = self.client()
         bodies = []
-        for path in ["/", "/solicitar", "/estado", "/static/public/calendar.js",
+        for path in ["/", "/solicitar", "/estado", "/presentacion", "/static/public/calendar.js",
                      "/static/public/request.js", "/static/public/status.js",
                      "/api/public/facilities",
                      f"/api/public/availability?facility_id={self.facility_id}&week_start={self.day(5)}"]:

@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Propuesta de reservas en línea · CCDR Heredia (prototipo)</title>
+  <meta name="description" content="Prototipo gratuito y de código abierto para pedir las instalaciones del Polideportivo desde el celular. Datos ficticios.">
+  <meta property="og:title" content="Reservas en línea para el CCDR Heredia (prototipo)">
+  <meta property="og:description" content="Pida una cancha desde el celular en menos de un minuto. Demo gratuita con datos ficticios.">
+  <meta property="og:image" content="https://ccdr-heredia-demo.onrender.com/static/img/calendario.jpg">
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/common.css">
+  <link rel="stylesheet" href="/static/public/presentacion.css">
+</head>
+<body class="pitch">
+  <div class="demo-banner">Demostración con datos ficticios · No es el sistema oficial del CCDR · No escriba datos personales reales</div>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow">Propuesta gratuita para el CCDR Heredia</p>
+        <h1>Pida una cancha del Polideportivo <span>desde el celular</span>, en menos de un minuto.</h1>
+        <p class="lead">Un calendario público con lo que está libre, una solicitud en un solo paso y una bandeja para que la administración apruebe con un clic. Sin llamadas de ida y vuelta.</p>
+        <div class="hero-actions">
+          <a class="btn hero-btn" href="/">Probar la demo</a>
+          <a class="btn hero-btn ghost" href="#tour">Ver cómo funciona</a>
+        </div>
+        <ul class="pills" aria-label="Compromisos">
+          <li>Gratis</li>
+          <li>Código abierto</li>
+          <li>Datos ficticios</li>
+          <li>Funciona en celular</li>
+        </ul>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="phone tilt-left"><img src="/static/img/calendario.jpg" alt="" loading="lazy"></div>
+        <div class="phone tilt-right"><img src="/static/img/estado.jpg" alt="" loading="lazy"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="pitch-main">
+    <section class="stats" aria-label="En números">
+      <div class="stat"><strong>&lt; 1 min</strong><span>para pedir un espacio</span></div>
+      <div class="stat"><strong>0</strong><span>datos personales en el calendario público</span></div>
+      <div class="stat"><strong>1 clic</strong><span>para aprobar o rechazar</span></div>
+      <div class="stat"><strong>Gratis</strong><span>y de código abierto</span></div>
+    </section>
+
+    <section id="tour" class="tour">
+      <h2>Pruébelo en 3 pasos</h2>
+      <p class="section-lead">Elija un rol y siga los pasos. Todo lo que escriba se borra solo cada día.</p>
+      <div class="tabs" role="tablist" aria-label="Rol">
+        <button type="button" role="tab" id="tab-public" aria-controls="panel-public" aria-selected="true" class="tab active">Soy deportista o vecino</button>
+        <button type="button" role="tab" id="tab-admin" aria-controls="panel-admin" aria-selected="false" class="tab">Soy de la administración</button>
+      </div>
+
+      <div id="panel-public" role="tabpanel" aria-labelledby="tab-public" class="panel">
+        <ol class="steps">
+          <li class="step">
+            <span class="num">1</span>
+            <h3>Mire el calendario</h3>
+            <p>Elija la instalación y la semana. Verá qué está <b>Disponible</b>, qué está <b>Ocupado</b> y los programas del CCDR.</p>
+            <a class="step-link" href="/">Abrir calendario →</a>
+          </li>
+          <li class="step">
+            <span class="num">2</span>
+            <h3>Toque un espacio libre</h3>
+            <p>El formulario llega con la fecha y la hora ya puestas. Use un nombre y un teléfono inventados.</p>
+            <a class="step-link" href="/solicitar">Hacer una solicitud →</a>
+          </li>
+          <li class="step">
+            <span class="num">3</span>
+            <h3>Guarde su enlace</h3>
+            <p>Recibe un enlace privado para ver si la solicitud fue aprobada y leer la nota de la administración.</p>
+            <a class="step-link" href="/estado">Consultar estado →</a>
+          </li>
+        </ol>
+      </div>
+
+      <div id="panel-admin" role="tabpanel" aria-labelledby="tab-admin" class="panel" hidden>
+        <div class="admin-grid">
+          <ol class="steps compact">
+            <li class="step">
+              <span class="num">1</span>
+              <h3>Entre a la administración</h3>
+              <p>Use el usuario y la contraseña de prueba que le compartimos.</p>
+              <a class="step-link" href="/admin/">Ir a la administración →</a>
+            </li>
+            <li class="step">
+              <span class="num">2</span>
+              <h3>Revise la bandeja</h3>
+              <p>Las solicitudes llegan ordenadas por fecha, con botones para <b>llamar</b> o escribir por <b>WhatsApp</b>, y un aviso si chocan con otra.</p>
+            </li>
+            <li class="step">
+              <span class="num">3</span>
+              <h3>Apruebe con un clic</h3>
+              <p>El sistema nunca deja aprobar dos reservas en el mismo espacio y hora, aunque dos personas trabajen al mismo tiempo.</p>
+            </li>
+          </ol>
+          <figure class="browser" aria-hidden="true">
+            <div class="browser-bar"><span></span><span></span><span></span></div>
+            <img src="/static/img/bandeja.jpg" alt="" loading="lazy">
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <h2>Qué gana el Comité</h2>
+      <div class="feature-grid">
+        <article class="feature">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
+          </div>
+          <h3>Horarios a la vista</h3>
+          <p>La gente ve qué está libre antes de llamar. Menos consultas repetidas por teléfono.</p>
+        </article>
+        <article class="feature">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg>
+          </div>
+          <h3>Cero choques</h3>
+          <p>El servidor revisa cada aprobación. Dos reservas nunca quedan en el mismo espacio y hora.</p>
+        </article>
+        <article class="feature">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg>
+          </div>
+          <h3>Privacidad primero</h3>
+          <p>El calendario público solo dice "Disponible" u "Ocupado". Consentimiento según la Ley 8968.</p>
+        </article>
+        <article class="feature">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 20h16M6 16V9M12 16V5M18 16v-4"/></svg>
+          </div>
+          <h3>Programas propios</h3>
+          <p>Bloquee espacios para mantenimiento o para las escuelas deportivas, una vez o cada semana.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="faq">
+      <h2>Preguntas frecuentes</h2>
+      <details>
+        <summary>¿Cuánto cuesta?</summary>
+        <p>Nada. Es un prototipo gratuito y de código abierto (licencia MIT). No implica cobros, contratos ni oferta de servicios. El código queda a disposición del Comité.</p>
+      </details>
+      <details>
+        <summary>¿Los datos que veo son reales?</summary>
+        <p>No. Todo es ficticio y se recarga solo cada día. No se cargaría ningún dato real sin un acuerdo de la Junta Directiva y una revisión legal sobre protección de datos.</p>
+      </details>
+      <details>
+        <summary>¿Por qué tarda en abrir la primera vez?</summary>
+        <p>La demo usa un servidor gratuito que se apaga si nadie la usa por 15 minutos. La primera visita lo despierta y puede tardar cerca de un minuto. Después responde al instante.</p>
+      </details>
+      <details>
+        <summary>¿Se manda correo o WhatsApp automático?</summary>
+        <p>En esta versión no. La administración contacta a la persona por teléfono o WhatsApp con un botón. El envío automático se puede agregar más adelante si el Comité lo necesita.</p>
+      </details>
+      <details>
+        <summary>¿Se puede adaptar a cómo trabajamos?</summary>
+        <p>Sí, esa es la idea. Horarios, duración de las reservas, anticipación mínima y textos son configurables. Para ajustarlo necesitamos su retroalimentación.</p>
+      </details>
+    </section>
+
+    <section class="questions">
+      <h2>Lo que nos ayudaría saber</h2>
+      <ol class="question-list">
+        <li>¿Qué instalaciones administra el Comité y cuáles la Municipalidad?</li>
+        <li>¿Cómo reciben hoy las solicitudes y cuántas por semana?</li>
+        <li>¿Cobran por el uso de las instalaciones?</li>
+        <li>¿Con cuánta anticipación conviene pedir, y cuánto puede durar una reserva?</li>
+        <li>¿Quién administraría el sistema y en qué equipo?</li>
+        <li>¿Cuánto tiempo deben guardar los datos de las solicitudes?</li>
+      </ol>
+    </section>
+
+    <section class="cta">
+      <h2>¿Lo vemos juntos?</h2>
+      <p>Pruebe la demo cuando guste. Con gusto la mostramos en una reunión corta y la ajustamos a su forma de trabajar.</p>
+      <div class="hero-actions">
+        <a class="btn hero-btn" href="/">Abrir la demo</a>
+        <a class="btn hero-btn ghost" href="https://github.com/estebanvm12-pixel/ccdr-heredia" rel="noopener noreferrer">Ver el código</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">Prototipo de código abierto (licencia MIT) propuesto por Esteban Venegas, regidor del Concejo Municipal de Heredia. Todos los datos son ficticios.</footer>
+  <script src="/static/public/presentacion.js"></script>
+</body>
+</html>

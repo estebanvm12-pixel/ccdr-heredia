@@ -42,7 +42,7 @@ class Client:
         hdrs.update(headers or {})
         conn.request(method, path, body=data, headers=hdrs)
         resp = conn.getresponse()
-        text = resp.read().decode("utf-8")
+        text = resp.read().decode("utf-8", errors="replace")
         set_cookie = resp.getheader("Set-Cookie")
         if set_cookie and set_cookie.startswith("ccdr_session="):
             value = set_cookie.split(";")[0]

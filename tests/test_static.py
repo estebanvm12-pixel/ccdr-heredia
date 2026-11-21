@@ -25,13 +25,15 @@ class StaticTests(ServerTestCase):
                      "/static/../app/auth.py", "/.git/config", "/static///localhost/share/x.js",
                      "/static/C:/Windows/win.ini", "/static/C:%5CWindows%5Cwin.ini",
                      "/static/public/index.html", "/static/public/../../server.py",
-                     "/static/%2e%2e/server.py", "/static/common.js/"]:
+                     "/static/%2e%2e/server.py", "/static/common.js/", "/static/img/../server.py",
+                     "/static/img/x.js", "/static/public/x.jpg"]:
             status, _, _ = self.client().request("GET", path)
             self.assertEqual(status, 404, path)
 
     def test_allowed_static_files_still_served(self):
         for path in ["/static/common.js", "/static/common.css", "/static/favicon.svg",
-                     "/static/public/calendar.js", "/static/admin/admin.js", "/favicon.ico"]:
+                     "/static/public/calendar.js", "/static/admin/admin.js", "/favicon.ico",
+                     "/presentacion", "/static/img/calendario.jpg", "/static/public/presentacion.js"]:
             status, _, _ = self.client().request("GET", path)
             self.assertEqual(status, 200, path)
 

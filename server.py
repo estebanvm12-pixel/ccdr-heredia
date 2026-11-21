@@ -24,6 +24,7 @@ PAGES = {
     "/": "public/index.html",
     "/solicitar": "public/solicitar.html",
     "/estado": "public/estado.html",
+    "/presentacion": "public/presentacion.html",
     "/admin/": "admin/index.html",
 }
 STATIC_TYPES = {
@@ -32,6 +33,7 @@ STATIC_TYPES = {
     ".js": "text/javascript; charset=utf-8",
     ".svg": "image/svg+xml",
     ".png": "image/png",
+    ".jpg": "image/jpeg",
     ".ico": "image/x-icon",
 }
 
@@ -59,7 +61,9 @@ ROUTES = [
 ]
 # Static paths must match this before touching the filesystem (blocks "..",
 # absolute paths, drive letters and UNC shares on Windows).
-STATIC_PATH_RE = re.compile(r"^(?:(?:public|admin)/)?[a-z0-9_-]{1,40}\.(?:css|js|svg)$")
+STATIC_PATH_RE = re.compile(
+    r"^(?:(?:public|admin)/)?[a-z0-9_-]{1,40}\.(?:css|js|svg)$|^img/[a-z0-9_-]{1,40}\.(?:jpg|png)$"
+)
 COMPILED_ROUTES = [(m, re.compile("^" + p + "$"), h, a) for m, p, h, a in ROUTES]
 
 
