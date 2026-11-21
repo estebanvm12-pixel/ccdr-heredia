@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Estado de mi solicitud · CCDR Heredia (prototipo)</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/common.css">
+  <link rel="stylesheet" href="/static/public/public.css">
+</head>
+<body>
+  <div class="demo-banner">Prototipo con datos ficticios · No es el sistema oficial del CCDR</div>
+  <header class="site-header">
+    <div class="inner">
+      <a class="brand" href="/">CCDR Heredia · Reservas<small>Polideportivo de Fátima</small></a>
+      <nav class="site-nav">
+        <a href="/">Calendario</a>
+        <a href="/solicitar">Solicitar</a>
+        <a href="/estado" class="active">Mi solicitud</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="card status-card hidden" id="result" aria-live="polite"></section>
+    <section class="card" id="lookup">
+      <h1>Estado de mi solicitud</h1>
+      <p class="muted small">Abra el enlace privado que recibió al enviar la solicitud, o péguelo aquí.</p>
+      <div id="lookup-error" class="alert error hidden" role="alert"></div>
+      <form id="lookup-form" novalidate>
+        <div class="field">
+          <label for="link">Enlace de seguimiento</label>
+          <input type="text" id="link" autocomplete="off" spellcheck="false">
+        </div>
+        <button type="submit" class="btn">Consultar</button>
+      </form>
+    </section>
+  </main>
+  <footer class="site-footer">Prototipo de código abierto (licencia MIT). Todos los datos son ficticios.</footer>
+  <script src="/static/common.js"></script>
+  <script src="/static/public/status.js"></script>
+</body>
+</html>

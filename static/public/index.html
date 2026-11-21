@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reservas · CCDR Heredia (prototipo)</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/common.css">
+  <link rel="stylesheet" href="/static/public/public.css">
+</head>
+<body>
+  <div class="demo-banner">Prototipo con datos ficticios · No es el sistema oficial del CCDR</div>
+  <header class="site-header">
+    <div class="inner">
+      <a class="brand" href="/">CCDR Heredia · Reservas<small>Polideportivo de Fátima</small></a>
+      <nav class="site-nav">
+        <a href="/" class="active">Calendario</a>
+        <a href="/solicitar">Solicitar</a>
+        <a href="/estado">Mi solicitud</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="card">
+      <h1>Disponibilidad de instalaciones</h1>
+      <p class="muted small">Toque un espacio <strong>Disponible</strong> para pedirlo. La administración revisa cada solicitud y le contacta por teléfono.</p>
+      <div class="field">
+        <label for="facility">Instalación</label>
+        <select id="facility"></select>
+      </div>
+      <div id="facility-info" class="facility-info small"></div>
+    </section>
+
+    <section class="card">
+      <div class="week-nav">
+        <button type="button" class="btn secondary small" id="prev-week" aria-label="Semana anterior">‹ Anterior</button>
+        <div class="week-title" id="week-title" aria-live="polite"></div>
+        <button type="button" class="btn secondary small" id="next-week" aria-label="Semana siguiente">Siguiente ›</button>
+      </div>
+      <div class="legend small">
+        <span class="slot-sample free">Disponible</span>
+        <span class="slot-sample busy">Ocupado</span>
+        <span class="slot-sample program">Programa del CCDR</span>
+        <span class="slot-sample na">No reservable</span>
+      </div>
+      <div id="calendar-error" class="alert error hidden" role="alert"></div>
+      <div id="week" class="week"></div>
+    </section>
+  </main>
+  <footer class="site-footer">Prototipo de código abierto (licencia MIT) para el Comité Cantonal de Deportes y Recreación de Heredia. Todos los datos son ficticios.</footer>
+  <script src="/static/common.js"></script>
+  <script src="/static/public/calendar.js"></script>
+</body>
+</html>

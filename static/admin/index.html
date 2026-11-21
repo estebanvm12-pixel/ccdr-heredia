@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Administración · CCDR Heredia (prototipo)</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/common.css">
+  <link rel="stylesheet" href="/static/admin/admin.css">
+</head>
+<body>
+  <div class="demo-banner">Prototipo con datos ficticios · No es el sistema oficial del CCDR</div>
+  <header class="site-header">
+    <div class="inner">
+      <a class="brand" href="/admin/">CCDR Heredia · Administración<small>Reservas de instalaciones</small></a>
+      <nav class="site-nav hidden" id="nav">
+        <button type="button" data-view="inbox" class="active">Bandeja</button>
+        <button type="button" data-view="all">Todas</button>
+        <button type="button" data-view="facilities">Instalaciones</button>
+        <button type="button" data-view="blocks">Bloqueos</button>
+        <button type="button" id="logout">Salir</button>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div id="flash" class="hidden" role="status" aria-live="polite"></div>
+
+    <section class="card login-card hidden" id="login-view">
+      <h1>Iniciar sesión</h1>
+      <div id="login-error" class="alert error hidden" role="alert"></div>
+      <form id="login-form" novalidate>
+        <div class="field">
+          <label for="username">Usuario</label>
+          <input type="text" id="username" name="username" autocomplete="username" maxlength="64" required>
+        </div>
+        <div class="field">
+          <label for="password">Contraseña</label>
+          <input type="password" id="password" name="password" autocomplete="current-password" maxlength="256" required>
+        </div>
+        <button type="submit" class="btn block">Entrar</button>
+      </form>
+    </section>
+
+    <section id="inbox-view" class="hidden">
+      <div class="view-head">
+        <h1>Bandeja de solicitudes pendientes</h1>
+        <button type="button" class="btn secondary small" id="reload-inbox">Recargar</button>
+      </div>
+      <p class="muted small">Ordenadas por fecha de uso. Antes de aprobar, el sistema revisa en el servidor que no choque con otra reserva aprobada ni con un bloqueo.</p>
+      <div id="inbox-list"></div>
+    </section>
+
+    <section id="all-view" class="hidden">
+      <div class="view-head">
+        <h1>Todas las solicitudes</h1>
+        <select id="all-status" aria-label="Filtrar por estado">
+          <option value="all">Todas</option>
+          <option value="pending">Pendientes</option>
+          <option value="approved">Aprobadas</option>
+          <option value="rejected">Rechazadas</option>
+          <option value="cancelled">Canceladas</option>
+          <option value="expired">Vencidas</option>
+        </select>
+      </div>
+      <div id="all-list"></div>
+    </section>
+
+    <section id="facilities-view" class="hidden">
+      <div class="view-head">
+        <h1>Instalaciones y horarios</h1>
+        <button type="button" class="btn small" id="new-facility">Nueva instalación</button>
+      </div>
+      <div id="facilities-list"></div>
+    </section>
+
+    <section id="blocks-view" class="hidden">
+      <h1>Bloqueos</h1>
+      <p class="muted small">Para mantenimiento o programas propios del CCDR (por ejemplo, escuelas deportivas). Si pone un nombre público, el calendario lo muestra; si no, solo dice "Ocupado".</p>
+      <form id="block-form" class="card" novalidate>
+        <h2>Nuevo bloqueo</h2>
+        <div id="block-error" class="alert error hidden" role="alert"></div>
+        <div class="row two">
+          <div class="field">
+            <label for="block-facility">Instalación</label>
+            <select id="block-facility" name="facility_id"></select>
+          </div>
+          <div class="field">
+            <label for="block-reason">Motivo interno</label>
+            <input type="text" id="block-reason" name="reason" maxlength="200" placeholder="Ej.: mantenimiento de piso">
+          </div>
+        </div>
+        <div class="row two">
+          <div class="field">
+            <label for="block-start">Inicio</label>
+            <input type="datetime-local" id="block-start" name="starts_at" step="1800">
+          </div>
+          <div class="field">
+            <label for="block-end">Fin</label>
+            <input type="datetime-local" id="block-end" name="ends_at" step="1800">
+          </div>
+        </div>
+        <div class="row three">
+          <div class="field">
+            <label for="block-label">Nombre público <span class="hint">(opcional)</span></label>
+            <input type="text" id="block-label" name="public_label" maxlength="80" placeholder="Ej.: Escuela de voleibol">
+          </div>
+          <div class="field">
+            <label for="block-recurrence">Repetición</label>
+            <select id="block-recurrence" name="recurrence">
+              <option value="none">Una sola vez</option>
+              <option value="weekly">Cada semana</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="block-until">Repetir hasta</label>
+            <input type="date" id="block-until" name="recurrence_until" disabled>
+          </div>
+        </div>
+        <button type="submit" class="btn">Crear bloqueo</button>
+      </form>
+      <div id="blocks-list"></div>
+    </section>
+  </main>
+  <footer class="site-footer">Prototipo de código abierto (licencia MIT). Todos los datos son ficticios.</footer>
+  <script src="/static/common.js"></script>
+  <script src="/static/admin/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Solicitar instalación · CCDR Heredia (prototipo)</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/common.css">
+  <link rel="stylesheet" href="/static/public/public.css">
+</head>
+<body>
+  <div class="demo-banner">Prototipo con datos ficticios · No es el sistema oficial del CCDR</div>
+  <header class="site-header">
+    <div class="inner">
+      <a class="brand" href="/">CCDR Heredia · Reservas<small>Polideportivo de Fátima</small></a>
+      <nav class="site-nav">
+        <a href="/">Calendario</a>
+        <a href="/solicitar" class="active">Solicitar</a>
+        <a href="/estado">Mi solicitud</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="card" id="form-card">
+      <h1>Solicitar una instalación</h1>
+      <p class="muted small">Llene el formulario y guarde el enlace que le damos al final. La administración del CCDR revisa la solicitud y le contacta por teléfono o WhatsApp.</p>
+      <div id="form-error" class="alert error hidden" role="alert"></div>
+      <form id="request-form" novalidate>
+        <div class="field">
+          <label for="facility_id">Instalación</label>
+          <select id="facility_id" name="facility_id" required></select>
+        </div>
+        <div class="row three">
+          <div class="field">
+            <label for="date">Fecha</label>
+            <input type="date" id="date" name="starts_at" required>
+          </div>
+          <div class="field">
+            <label for="start">Desde</label>
+            <select id="start" required></select>
+          </div>
+          <div class="field">
+            <label for="end">Hasta</label>
+            <select id="end" name="ends_at" required></select>
+          </div>
+        </div>
+        <p id="hours-hint" class="muted small"></p>
+        <div class="row two">
+          <div class="field">
+            <label for="requester_name">Nombre completo</label>
+            <input type="text" id="requester_name" name="requester_name" maxlength="100" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="phone">Teléfono <span class="hint">(le llamaremos a este número)</span></label>
+            <input type="tel" id="phone" name="phone" maxlength="20" autocomplete="tel" inputmode="tel" placeholder="8888-8888" required>
+          </div>
+        </div>
+        <div class="row two">
+          <div class="field">
+            <label for="organization">Organización o equipo <span class="hint">(opcional)</span></label>
+            <input type="text" id="organization" name="organization" maxlength="120" autocomplete="organization">
+          </div>
+          <div class="field">
+            <label for="email">Correo <span class="hint">(opcional)</span></label>
+            <input type="email" id="email" name="email" maxlength="254" autocomplete="email">
+          </div>
+        </div>
+        <div class="row two">
+          <div class="field">
+            <label for="purpose">¿Para qué la necesita?</label>
+            <textarea id="purpose" name="purpose" maxlength="500" placeholder="Ej.: entrenamiento de fútbol del equipo juvenil" required></textarea>
+          </div>
+          <div class="field">
+            <label for="expected_attendees">Cantidad de personas</label>
+            <input type="number" id="expected_attendees" name="expected_attendees" min="1" max="10000" inputmode="numeric" required>
+          </div>
+        </div>
+        <div class="hp-field" aria-hidden="true">
+          <label for="website">No llene este campo</label>
+          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+        </div>
+        <details class="privacy-notice">
+          <summary>Aviso de privacidad (Ley 8968)</summary>
+          <p><strong>Texto preliminar, pendiente de revisión legal.</strong></p>
+          <ul>
+            <li><strong>Responsable:</strong> Comité Cantonal de Deportes y Recreación de Heredia.</li>
+            <li><strong>Datos que pedimos:</strong> nombre, teléfono, organización y correo (opcionales), propósito y cantidad de personas.</li>
+            <li><strong>Para qué:</strong> únicamente para gestionar esta solicitud y contactarle sobre ella. No se publican: el calendario público solo muestra "Disponible" u "Ocupado".</li>
+            <li><strong>Por cuánto tiempo:</strong> si la solicitud se rechaza, se cancela o vence, sus datos personales se borran 12 meses después.</li>
+            <li><strong>Sus derechos:</strong> puede pedir acceso, corrección o eliminación de sus datos a la administración del CCDR.</li>
+          </ul>
+        </details>
+        <div class="field">
+          <label class="checkbox" for="consent">
+            <input type="checkbox" id="consent" name="consent" required>
+            <span>Leí el aviso de privacidad y acepto que el CCDR use mis datos para gestionar esta solicitud.</span>
+          </label>
+        </div>
+        <button type="submit" class="btn block" id="submit">Enviar solicitud</button>
+      </form>
+    </section>
+
+    <section class="card hidden" id="done-card" aria-live="polite">
+      <div class="alert ok"><strong>¡Solicitud enviada!</strong> Está <strong>pendiente</strong> de revisión.</div>
+      <h2>Guarde este enlace</h2>
+      <p>Con él puede ver si su solicitud fue aprobada. <strong>Es privado y solo se muestra esta vez.</strong></p>
+      <div class="confirm-link" id="status-link"></div>
+      <div class="actions">
+        <button type="button" class="btn" id="copy-link">Copiar enlace</button>
+        <a class="btn secondary" id="open-link" href="/estado">Ver estado</a>
+      </div>
+      <p class="muted small" id="copy-msg" aria-live="polite"></p>
+    </section>
+  </main>
+  <footer class="site-footer">Prototipo de código abierto (licencia MIT). Todos los datos son ficticios.</footer>
+  <script src="/static/common.js"></script>
+  <script src="/static/public/request.js"></script>
+</body>
+</html>

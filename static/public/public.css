@@ -1,0 +1,61 @@
+.facility-info dl { display: grid; grid-template-columns: auto 1fr; gap: 0.2rem 0.75rem; margin: 0; }
+.facility-info dt { font-weight: 600; color: var(--muted); }
+.facility-info dd { margin: 0; }
+.facility-info .rules { white-space: pre-line; margin-top: 0.5rem; }
+
+.week-nav { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.75rem; }
+.week-title { font-weight: 700; text-align: center; flex: 1; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.75rem; }
+.slot-sample { padding: 0.15rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); }
+
+.week { display: grid; gap: 0.75rem; grid-template-columns: 1fr; }
+@media (min-width: 900px) { .week { grid-template-columns: repeat(7, 1fr); gap: 0.5rem; } }
+
+.day { border: 1px solid var(--border); border-radius: var(--radius); padding: 0.6rem; background: #fcfbf9; }
+.day.today { border-color: var(--brand); box-shadow: 0 0 0 1px var(--brand) inset; }
+.day h3 { font-size: 0.95rem; margin-bottom: 0.4rem; }
+.day .closed { color: var(--muted); font-size: 0.9rem; }
+.slots { display: grid; gap: 0.35rem; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+@media (min-width: 900px) { .slots { grid-template-columns: 1fr; } }
+
+.slot, .slot-sample {
+  font-size: 0.85rem;
+}
+.slot {
+  display: flex;
+  flex-direction: column;
+  padding: 0.45rem 0.55rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--text);
+  min-height: 44px;
+}
+.slot .time { font-weight: 700; }
+.slot .label { font-size: 0.78rem; }
+.free, a.slot.free { background: var(--free-soft); border-color: #a9d8bd; color: #0f4d2a; }
+a.slot.free:hover { background: #d3ecdd; }
+.busy { background: var(--busy-soft); color: #444; }
+.program { background: var(--program-soft); border-color: #ecd28f; color: #5c3d00; }
+.na { background: #f3f2ef; color: #8a8a8a; }
+
+.confirm-link {
+  word-break: break-all;
+  background: #f3f2ef;
+  border: 1px dashed #bdb7ad;
+  border-radius: 8px;
+  padding: 0.6rem;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+.privacy-notice { font-size: 0.875rem; background: #f8f7f4; border: 1px solid var(--border); border-radius: 8px; padding: 0.75rem; margin-bottom: 0.75rem; }
+.privacy-notice summary { cursor: pointer; font-weight: 600; }
+.privacy-notice ul { padding-left: 1.2rem; margin: 0.5rem 0; }
+
+.status-card .status-line { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.75rem; font-size: 1.1rem; }
+.status-card dl { display: grid; grid-template-columns: auto 1fr; gap: 0.3rem 0.75rem; margin: 0 0 0.75rem; }
+.status-card dt { font-weight: 600; color: var(--muted); }
+.status-card dd { margin: 0; }
+.note { white-space: pre-line; background: #f8f7f4; border-left: 4px solid var(--brand); padding: 0.6rem 0.75rem; border-radius: 4px; }
