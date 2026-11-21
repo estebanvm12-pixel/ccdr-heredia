@@ -47,6 +47,43 @@
       <div class="stat"><strong>Gratis</strong><span>y de código abierto</span></div>
     </section>
 
+    <section class="compare" aria-labelledby="compare-title">
+      <h2 id="compare-title">Pedir una cancha, antes y después</h2>
+      <p class="section-lead">Toque cada lado para comparar el camino que recorre una persona.</p>
+      <div class="switch" role="group" aria-label="Comparar">
+        <button type="button" class="switch-btn" data-mode="before" aria-pressed="false">Hoy</button>
+        <button type="button" class="switch-btn active" data-mode="after" aria-pressed="true">Con el sistema</button>
+      </div>
+      <div class="journey" data-mode="after">
+        <ol class="journey-steps before">
+          <li><b>Buscar a quién llamar.</b> El sitio web no dice cómo pedir una instalación.</li>
+          <li><b>Llamar en horario de oficina.</b> Si nadie contesta, volver a intentar otro día.</li>
+          <li><b>Preguntar qué está libre.</b> Alguien revisa un cuaderno o un chat y responde de memoria.</li>
+          <li><b>Esperar la confirmación.</b> Sin forma de saber si la solicitud quedó anotada.</li>
+          <li><b>Riesgo de choque.</b> Dos grupos pueden llegar a la misma hora a la misma cancha.</li>
+        </ol>
+        <ol class="journey-steps after">
+          <li><b>Abrir el calendario, a cualquier hora.</b> Se ve al instante qué está libre.</li>
+          <li><b>Tocar un espacio y llenar un formulario.</b> Menos de un minuto, desde el celular.</li>
+          <li><b>Recibir un enlace privado.</b> La persona sabe que su solicitud llegó.</li>
+          <li><b>La administración aprueba con un clic.</b> Con botón para llamar o escribir por WhatsApp.</li>
+          <li><b>Cero choques.</b> El sistema no permite aprobar dos reservas en el mismo espacio y hora.</li>
+        </ol>
+      </div>
+      <p class="fine-print">"Hoy" describe lo que suele pasar sin un sistema en línea, según lo que se pudo ver públicamente el 20 de noviembre de 2026. El Comité conoce mejor su proceso real.</p>
+    </section>
+
+    <section class="live" aria-labelledby="live-title">
+      <div class="live-head">
+        <h2 id="live-title"><span class="dot" aria-hidden="true"></span> En vivo en la demo</h2>
+        <a class="step-link" href="/">Ver calendario completo →</a>
+      </div>
+      <p class="section-lead">Espacios libres en los próximos 7 días, leídos ahora mismo del sistema de prueba. Toque uno para pedirlo.</p>
+      <div id="live-grid" class="live-grid" aria-live="polite">
+        <p class="muted">Cargando disponibilidad…</p>
+      </div>
+    </section>
+
     <section id="tour" class="tour">
       <h2>Pruébelo en 3 pasos</h2>
       <p class="section-lead">Elija un rol y siga los pasos. Todo lo que escriba se borra solo cada día.</p>
@@ -140,6 +177,26 @@
       </div>
     </section>
 
+    <section class="norisk" aria-labelledby="norisk-title">
+      <h2 id="norisk-title">Sin riesgo para el Comité</h2>
+      <div class="norisk-grid">
+        <div class="norisk-item"><strong>Costo cero</strong><p>No hay cobros, contratos ni mensualidades. Es un aporte gratuito.</p></div>
+        <div class="norisk-item"><strong>El código es suyo</strong><p>Licencia MIT: el Comité puede usarlo, cambiarlo o entregárselo a quien quiera.</p></div>
+        <div class="norisk-item"><strong>Sin amarras</strong><p>Funciona con Python estándar, en cualquier computadora. No depende de ningún proveedor.</p></div>
+        <div class="norisk-item"><strong>Se puede descartar</strong><p>Si no les sirve, no pasa nada. Ningún dato real se ha cargado.</p></div>
+      </div>
+    </section>
+
+    <section class="roadmap" aria-labelledby="roadmap-title">
+      <h2 id="roadmap-title">Cómo podríamos empezar</h2>
+      <ol class="timeline">
+        <li><span class="when">Semana 1</span><h3>Reunión de 20 minutos</h3><p>Recorremos la demo juntos y anotamos cómo trabajan hoy.</p></li>
+        <li><span class="when">Semanas 2–3</span><h3>Ajustes</h3><p>Horarios reales, duración de las reservas, textos y reglas del Comité.</p></li>
+        <li><span class="when">Mes 1</span><h3>Piloto con una instalación</h3><p>Probar con una sola cancha y medir si baja la carga de llamadas.</p></li>
+        <li><span class="when">Después</span><h3>Decisión de la Junta</h3><p>Solo con acuerdo de la Junta Directiva y revisión legal de protección de datos.</p></li>
+      </ol>
+    </section>
+
     <section class="faq">
       <h2>Preguntas frecuentes</h2>
       <details>
@@ -187,6 +244,7 @@
   </main>
 
   <footer class="site-footer">Prototipo de código abierto (licencia MIT) propuesto por Esteban Venegas, regidor del Concejo Municipal de Heredia. Todos los datos son ficticios.</footer>
+  <script src="/static/common.js"></script>
   <script src="/static/public/presentacion.js"></script>
 </body>
 </html>
