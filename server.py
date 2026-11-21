@@ -113,6 +113,10 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         self._dispatch("GET")
 
+    def do_HEAD(self):
+        # Link previews and uptime checks use HEAD; same as GET without a body.
+        self._dispatch("GET")
+
     def do_POST(self):
         self._dispatch("POST")
 

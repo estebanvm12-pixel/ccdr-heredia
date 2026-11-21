@@ -35,6 +35,12 @@ class StaticTests(ServerTestCase):
             status, _, _ = self.client().request("GET", path)
             self.assertEqual(status, 200, path)
 
+    def test_head_requests(self):
+        status, body, resp = self.client().request("HEAD", "/")
+        self.assertEqual(status, 200)
+        self.assertEqual(body, "")
+        self.assertIsNotNone(resp.getheader("Content-Security-Policy"))
+
     def test_admin_redirect(self):
         status, _, resp = self.client().request("GET", "/admin")
         self.assertEqual(status, 301)
