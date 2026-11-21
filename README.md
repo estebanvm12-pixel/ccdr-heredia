@@ -87,7 +87,9 @@ El archivo [render.yaml](render.yaml) despliega una demo con **solo datos fictic
 2. Elija **New → Blueprint** y luego el repositorio `ccdr-heredia`.
 3. Pulse **Apply**.
 
-Render crea el servicio `ccdr-heredia-demo` y lo vuelve a desplegar en cada `git push` a `main`.
+Render crea el servicio `ccdr-heredia-demo`.
+
+**Demo actual:** <https://ccdr-heredia-demo.onrender.com>. Se creó con la opción *Public Git Repository*, sin darle a Render acceso a la cuenta de GitHub, así que **no se vuelve a desplegar sola**. Después de cada `git push` hay que entrar al servicio en Render y elegir **Manual Deploy → Deploy latest commit**. Para que sea automático, conecte GitHub en Render.
 
 ## Configuración
 
